@@ -2,6 +2,7 @@ import Lottie from "lottie-react";
 import SignUpLottie from '../assets/sign-up.json'
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import axios from "axios";
 
 const SignUp = () => {
     const {SignUp} = useContext(AuthContext)
@@ -21,6 +22,12 @@ const SignUp = () => {
         SignUp(email, password)
         .then(data=>{
             console.log(data)
+            // const user = {email: email}
+            // axios.post(`${import.meta.env.VITE_API}/jwt`, user, {withCredentials: true})
+            // .then(res=> {
+            //     console.log(res.data)
+            // })
+
             form.reset()
         })
         .catch(err=>{

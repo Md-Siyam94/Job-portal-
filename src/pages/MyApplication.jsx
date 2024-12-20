@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import useAuth from "../provider/useAuth";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import axios from "axios";
+import useAxios from "../provider/useAxios";
+
 
 const MyApplication = () => {
     const { user } = useAuth()
     const [jobs, setJobs] = useState([])
+    const axiosSecure = useAxios()
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API}/job-application?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setJobs(data))
+        // fetch(`${import.meta.env.VITE_API}/job-application?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then(data => setJobs(data))
+
+        axiosSecure.get(`/job-application?email=${user.email}`)
+        .then(res=> setJobs(res.data))
+
     }, [user.email])
     
     const handleDelete = (id)=>{
